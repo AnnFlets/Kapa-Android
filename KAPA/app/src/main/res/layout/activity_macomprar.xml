@@ -6,11 +6,28 @@
     android:layout_height="match_parent"
     tools:context=".MAcomprar">
 
-    <TextView
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="COMPRAR">
+        android:layout_height="55dp"
+        android:background="@android:color/holo_green_dark">
 
-    </TextView>
+        <TextView
+            android:id="@+id/textMarca"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/app_name"
+            android:textColor="#FF8000"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            />
+
+        <ImageView
+            android:id="@+id/imageMarca"
+            android:layout_width="200dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="10dp"
+            app:srcCompat="@drawable/lengua2" />
+
+    </RelativeLayout>
 
 </RelativeLayout>
