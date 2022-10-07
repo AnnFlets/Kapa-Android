@@ -50,26 +50,34 @@
             android:layout_height="wrap_content"
             android:id="@+id/edtUsuario"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="10dp"
             android:layout_marginEnd="8dp"
-            android:background="@android:color/darker_gray"
+            android:backgroundTint="@android:color/holo_green_dark"
             android:ems="10"
             android:hint="Usuario"
             android:inputType="textPersonName"
-            android:paddingLeft="5dp"/>
+            android:textColor="@android:color/holo_green_dark"
+            android:textSize="20sp"
+            android:textFontWeight="15"
+            android:textStyle="bold"
+            android:paddingLeft="5dp"
+            android:drawableLeft="@drawable/email"
+            />
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/edtPassword"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="10dp"
             android:layout_marginEnd="8dp"
-            android:background="@android:color/darker_gray"
+            android:backgroundTint="@android:color/holo_green_dark"
             android:ems="10"
             android:hint="Password"
             android:inputType="textPassword"
-            android:paddingLeft="5dp"/>
+            android:textColor="@android:color/holo_green_dark"
+            android:textSize="20sp"
+            android:textFontWeight="15"
+            android:paddingLeft="5dp"
+            android:drawableLeft="@drawable/password"/>
 
         <Button
             android:id="@+id/btnLogin"
@@ -78,10 +86,26 @@
             android:layout_marginLeft="15dp"
             android:layout_marginTop="30dp"
             android:layout_marginRight="15dp"
-            android:background="@android:color/holo_orange_dark"
+            android:backgroundTint="@color/white"
             android:text="Iniciar sesion"
-            android:textColor="#FFF"
+            android:textColor="@android:color/holo_orange_dark"
+            android:textFontWeight="100"
+            android:textStyle="bold"
             android:textSize="18sp"/>
+
+        <Button
+            android:id="@+id/btnRegistrar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginRight="15dp"
+            android:background="@color/cardview_shadow_end_color"
+            android:text="Registrar"
+            android:textColor="@android:color/holo_orange_dark"
+            android:textFontWeight="100"
+            android:textStyle="bold"
+            android:textSize="13sp"/>
 
 
         
