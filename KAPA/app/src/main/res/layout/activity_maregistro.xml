@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MAregistro">
+
+    <EditText
+        android:id="@+id/edtNombre"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Nombre"
+        android:backgroundTint="@android:color/holo_orange_dark"
+        android:layout_marginTop="50dp"/>
+
+    <EditText
+        android:id="@+id/edtApellido"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Apellido"
+        android:backgroundTint="@android:color/holo_orange_dark"
+        android:layout_marginTop="30dp"
+        android:layout_below="@+id/edtNombre"/>
+
+    <EditText
+        android:id="@+id/edtNIT"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="NIT"
+        android:backgroundTint="@android:color/holo_orange_dark"
+        android:layout_marginTop="30dp"
+        android:layout_below="@+id/edtApellido"/>
+
+    <EditText
+        android:id="@+id/edtDireccion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Direccion"
+        android:backgroundTint="@android:color/holo_orange_dark"
+        android:layout_marginTop="30dp"
+        android:layout_below="@+id/edtNIT"/>
+
+    <EditText
+        android:id="@+id/edtTelefono"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Telefono"
+        android:backgroundTint="@android:color/holo_orange_dark"
+        android:layout_marginTop="30dp"
+        android:layout_below="@+id/edtDireccion"/>
+
+    <EditText
+        android:id="@+id/edtUsuario"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Nombre Usuario"
+        android:backgroundTint="@android:color/holo_orange_dark"
+        android:layout_marginTop="30dp"
+        android:layout_below="@+id/edtTelefono"/>
+
+    <EditText
+        android:id="@+id/edtPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Password"
+        android:backgroundTint="@android:color/holo_orange_dark"
+        android:layout_marginTop="30dp"
+        android:layout_below="@+id/edtUsuario"/>
+
+    <EditText
+        android:id="@+id/edtRepassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Reescriba password"
+        android:backgroundTint="@android:color/holo_orange_dark"
+        android:layout_marginTop="30dp"
+        android:layout_below="@id/edtPassword"/>
+
+    <Button
+        android:id="@+id/btnRegistrar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/cardview_shadow_end_color"
+        android:hint="REGISTRAR"
+        android:textColor="@android:color/holo_green_dark"
+        android:textFontWeight="200"
+        android:textStyle="bold"
+        android:textSize="13sp"
+        android:layout_marginTop="30dp"
+        android:layout_below="@id/edtRepassword"/>
+</RelativeLayout>

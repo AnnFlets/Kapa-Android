@@ -75,7 +75,7 @@
             android:inputType="textPassword"
             android:textColor="@android:color/holo_green_dark"
             android:textSize="20sp"
-            android:textFontWeight="15"
+            android:textFontWeight="100"
             android:paddingLeft="5dp"
             android:drawableLeft="@drawable/password"/>
 
@@ -94,7 +94,7 @@
             android:textSize="18sp"/>
 
         <Button
-            android:id="@+id/btnRegistrar"
+            android:id="@+id/btnIrregistro"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
@@ -106,8 +106,6 @@
             android:textFontWeight="100"
             android:textStyle="bold"
             android:textSize="13sp"/>
-
-
         
     </LinearLayout>
 
