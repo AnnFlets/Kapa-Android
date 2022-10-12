@@ -81,12 +81,12 @@
         android:id="@+id/btnRegistrar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@id/edtRepassword"
+        android:layout_marginTop="30dp"
         android:background="@color/cardview_shadow_end_color"
         android:hint="REGISTRAR"
         android:textColor="@android:color/holo_green_dark"
         android:textFontWeight="200"
-        android:textStyle="bold"
         android:textSize="13sp"
-        android:layout_marginTop="30dp"
-        android:layout_below="@id/edtRepassword"/>
+        android:textStyle="bold" />
 </RelativeLayout>
