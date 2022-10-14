@@ -30,4 +30,14 @@
 
     </RelativeLayout>
 
+    <TextView
+        android:id="@+id/textComprar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="COMPRA COMPRA COMPRA!"
+        android:textColor="#FF8000"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        />
+
 </RelativeLayout>
