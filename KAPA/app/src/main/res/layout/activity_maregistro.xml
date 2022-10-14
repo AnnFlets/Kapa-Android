@@ -10,9 +10,9 @@
         android:id="@+id/edtNombre"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Nombre"
+        android:layout_marginTop="50dp"
         android:backgroundTint="@android:color/holo_orange_dark"
-        android:layout_marginTop="50dp"/>
+        android:hint="Nombre" />
 
     <EditText
         android:id="@+id/edtApellido"
@@ -77,11 +77,20 @@
         android:layout_marginTop="30dp"
         android:layout_below="@id/edtPassword"/>
 
+    <EditText
+        android:id="@+id/edtCorreo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Escriba su correo"
+        android:backgroundTint="@android:color/holo_orange_dark"
+        android:layout_marginTop="30dp"
+        android:layout_below="@id/edtRepassword"/>
+
     <Button
         android:id="@+id/btnRegistrar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/edtRepassword"
+        android:layout_below="@id/edtCorreo"
         android:layout_marginTop="30dp"
         android:background="@color/cardview_shadow_end_color"
         android:hint="REGISTRAR"
