@@ -2,7 +2,7 @@ package com.krevolorio.myappkapa;
 
 import static android.os.Build.VERSION_CODES.M;
 
-import androidx.annotation.Nullable;
+//import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -58,21 +58,15 @@ public class MAlogin extends AppCompatActivity {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                if (!response.isEmpty()){
-                    Intent intent=new Intent(getApplicationContext(),MAcomprar.class);
+                if (!response.isEmpty())  {
+                    Intent intent = new Intent(getApplicationContext(), MAcomprar.class);
                     startActivity(intent);
-                }else{
-                    Toast.makeText(MAlogin.this, "Usuario o contraseña incorrecta\n si no estas registrado, registrate", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(MAlogin.this, "Usuario o contraseña incorrecta", Toast.LENGTH_SHORT).show();
                 }
 
             }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Toast.makeText(MAlogin.this, error.toString(), Toast.LENGTH_SHORT).show();
-
-            }
-        }){
+        }, error -> Toast.makeText(MAlogin.this, error.toString(), Toast.LENGTH_SHORT).show()){
             //@Nullable
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
