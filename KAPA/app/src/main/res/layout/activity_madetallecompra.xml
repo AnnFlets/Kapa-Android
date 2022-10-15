@@ -99,20 +99,23 @@
             android:layout_height="wrap_content" />
 
 
-    <Button
-        android:id="@+id/btnCancelar"
-        android:layout_marginTop="100dp"
-        android:layout_marginRight="250dp"
-        android:text="Cancelar"
-        />
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/pagar"
+            android:layout_marginTop="150dp"
+            android:contextClickable="true"
+            android:src="@drawable/ic_baseline_shopping_cart_24"
+            app:backgroundTint="#579B28"
 
-    <Button
-        android:id="@+id/btnPagar"
-        android:layout_marginTop="1dp"
-        android:layout_marginRight="250dp"
-        android:text="Pagar"
+            />
+       />
 
-        />
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/cancelar"
+        android:layout_marginTop="10dp"
+        android:contextClickable="true"
+        android:src="@drawable/cancelar"
+       app:backgroundTint="#FF3933"/>
+    />
 
 </TableLayout>
 
