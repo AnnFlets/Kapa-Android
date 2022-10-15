@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MAdetallecompra">
+    tools:context=".MAdetallecompra"
+    android:stretchColumns="1,2,3,4"
+    android:layout_margin="8dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -27,10 +29,92 @@
             android:layout_height="30dp"
             android:layout_marginLeft="10dp"
             app:srcCompat="@drawable/lengua3" />
-
     </RelativeLayout>
 
-</RelativeLayout>
+
+    <EditText
+        android:id="@+id/txtNom"
+        android:layout_width="80dp"
+        android:layout_height="45sp"
+        android:text="Cliente:"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/txtNIT"
+        android:layout_width="82dp"
+        android:layout_height="45sp"
+        android:text="NIT:"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/txtTotal"
+        android:layout_width="match_parent"
+        android:layout_height="45sp"
+        android:text="TOTAL:"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        />
+
+
+    <TableRow>
+        <TextView
+            android:text="QTY"
+            android:textSize="16dp"
+            android:textStyle="bold"
+            android:padding="10dp"
+            android:gravity="center"
+            android:layout_column="1"/>
+
+        <TextView
+            android:text="Descripcion"
+            android:textSize="16dp"
+            android:textStyle="bold"
+            android:padding="10dp"
+            android:gravity="center"
+            android:layout_column="1"/>
+        <TextView
+            android:text="Precio"
+            android:textSize="16dp"
+            android:textStyle="bold"
+            android:padding="10dp"
+            android:gravity="center"
+            android:layout_column="1"/>
+        <TextView
+            android:text="Subtotal"
+            android:textSize="16dp"
+            android:textStyle="bold"
+            android:padding="10dp"
+            android:gravity="center"
+            android:layout_column="1"/>
+
+    </TableRow>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+
+    <Button
+        android:id="@+id/btnCancelar"
+        android:layout_marginTop="100dp"
+        android:layout_marginRight="250dp"
+        android:text="Cancelar"
+        />
+
+    <Button
+        android:id="@+id/btnPagar"
+        android:layout_marginTop="1dp"
+        android:layout_marginRight="250dp"
+        android:text="Pagar"
+
+        />
+
+</TableLayout>
 
 
 
