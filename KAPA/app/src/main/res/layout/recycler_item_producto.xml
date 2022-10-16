@@ -23,7 +23,7 @@
             android:layout_margin="15sp"
             >
             <TextView
-                android:id="@+id/txt_descripcionProducto"
+                android:id="@+id/txtres_descripcionProducto"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Descripción Producto"
@@ -32,7 +32,7 @@
                 android:textColor="@color/black"/>
 
             <TextView
-                android:id="@+id/txt_presentacionProducto"
+                android:id="@+id/txtres_presentacionProducto"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Presentación Producto"
@@ -41,7 +41,7 @@
                 android:textColor="@color/purple_500"/>
 
             <TextView
-                android:id="@+id/txt_precioProducto"
+                android:id="@+id/txtres_precioProducto"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Precio Producto Q"

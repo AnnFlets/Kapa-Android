@@ -16,18 +16,18 @@ import java.util.ArrayList;
 
 public class AdaptadorRecylerProducto extends RecyclerView.Adapter<AdaptadorRecylerProducto.ViewHolder> {
 
-    private ArrayList<ProductoVO> pdvo = new ArrayList<>();
+    private ArrayList<ProductoVO> productos = new ArrayList<>();
 
     public AdaptadorRecylerProducto(ArrayList<ProductoVO> pdvo){
 
-      this.pdvo = pdvo;
+      this.productos = pdvo;
 
 
     }
 
-    @NonNull
+
     @Override
-    public AdaptadorRecylerProducto.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         //INFLAR
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycler_item_producto,
                 parent,false);
@@ -38,11 +38,10 @@ public class AdaptadorRecylerProducto extends RecyclerView.Adapter<AdaptadorRecy
     }
 
     @Override
-    public void onBindViewHolder(@NonNull AdaptadorRecylerProducto.ViewHolder holder, int position) {
-      holder.setDataProductos(R.drawable.lengua,
-              pdvo.get(position).getDescripcionProducto(),
-              pdvo.get(position).getPresentacionProducto(),
-              pdvo.get(position).getPrecioVentaProducto());
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        holder.setDataProductos(productos.get(position).getDescripcionProducto(),
+                productos.get(position).getPresentacionProducto(),
+                productos.get(position).getPrecioVentaProducto());
 
 
     }
@@ -50,30 +49,30 @@ public class AdaptadorRecylerProducto extends RecyclerView.Adapter<AdaptadorRecy
     @Override
     public int getItemCount() {
 
-        return this.pdvo.size();
+        return this.productos.size();
     }
 
     public class   ViewHolder extends RecyclerView.ViewHolder{
 
-        private ImageView imageViewProducto;
+        //private ImageView imageViewProducto;
         private TextView txtView_descripcionProducto, txtViewPresentacionProducto, txtViewPrecioProducto;
 
 
         public ViewHolder(@NonNull View itemView) {
 
             super(itemView);
-            imageViewProducto = itemView.findViewById(R.id.imgProductoCategoria);
-            txtView_descripcionProducto = itemView.findViewById(R.id.txt_descripcionProducto);
-            txtViewPresentacionProducto = itemView.findViewById(R.id.txt_presentacionProducto);
-            txtViewPrecioProducto = itemView.findViewById(R.id.txt_precioProducto);
+            //imageViewProducto = itemView.findViewById(R.id.imgProductoCategoria);
+            txtView_descripcionProducto = itemView.findViewById(R.id.txtres_descripcionProducto);
+            txtViewPresentacionProducto = itemView.findViewById(R.id.txtres_presentacionProducto);
+            txtViewPrecioProducto = itemView.findViewById(R.id.txtres_precioProducto);
 
         }
-        private void setDataProductos(Integer img, String descripcion, String presentacion, Double precio){
+        private void setDataProductos(String descripcion, String presentacion, Double precio){
 
-        imageViewProducto.setImageResource(img);
+        //imageViewProducto.setImageResource(img);
         txtView_descripcionProducto.setText(descripcion);
         txtViewPresentacionProducto.setText(presentacion);
-        txtViewPrecioProducto.setText(Double.toString(precio));
+        txtViewPrecioProducto.setText(String.valueOf(precio));
 
 
         }
