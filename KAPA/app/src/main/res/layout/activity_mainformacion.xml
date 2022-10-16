@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".MAInformacion"
     android:orientation="vertical"
-    android:background="@color/white">
+    android:background="@drawable/ic_fondo_info">
     <androidx.cardview.widget.CardView
         android:layout_width="300sp"
         android:layout_height="420sp"
@@ -45,6 +45,7 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:src="@drawable/ic_logo"
                 android:layout_gravity="center"
                 android:layout_margin="35sp"
                 />

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".MAConfiguraciones"
     android:orientation="vertical"
-    android:background="@color/white">
+    android:background="#FFFFFF">
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -30,6 +30,7 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:src="@drawable/ic_usuario"
                 android:layout_gravity="center"
                 android:layout_margin="25sp"
                 />
@@ -37,8 +38,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:layout_marginLeft="15sp"
-                android:layout_marginRight="15sp"
+                android:layout_margin="15sp"
+                android:padding="15sp"
+                android:background="#ECECEC"
                 >
                 <TextView
                     android:layout_width="wrap_content"
