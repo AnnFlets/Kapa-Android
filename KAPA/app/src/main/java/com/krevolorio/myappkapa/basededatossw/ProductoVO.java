@@ -6,22 +6,18 @@ public class ProductoVO {
     private String marcaProducto;
     private String presentacionProducto;
     private String categoriaProducto;
-    private Double precioCompraProducto;
-    private Double precioVentaProducto;
+    private double precioCompraProducto;
+    private double precioVentaProducto;
     private Integer existenciaProducto;
     private String imgProducto;
-    private Integer idProveedor_fk;
-    private String nombreProveedorProducto;
+    private Integer idProveedorFK;
 
     //CONSTRUCTOR VACIO
     public ProductoVO() {
     }
 
     //COMPLETO
-    public ProductoVO(Integer idProducto, String descripcionProducto, String marcaProducto,
-                      String presentacionProducto, String categoriaProducto, Double precioCompraProducto,
-                      Double precioVentaProducto, Integer existenciaProducto, String imgProducto,
-                      Integer idProveedor_fk, String nombreProveedorProducto) {
+    public ProductoVO(Integer idProducto, String descripcionProducto, String marcaProducto, String presentacionProducto, String categoriaProducto, double precioCompraProducto, double precioVentaProducto, Integer existenciaProducto, String imgProducto, Integer idProveedorFK) {
         this.idProducto = idProducto;
         this.descripcionProducto = descripcionProducto;
         this.marcaProducto = marcaProducto;
@@ -31,20 +27,7 @@ public class ProductoVO {
         this.precioVentaProducto = precioVentaProducto;
         this.existenciaProducto = existenciaProducto;
         this.imgProducto = imgProducto;
-        this.idProveedor_fk = idProveedor_fk;
-        this.nombreProveedorProducto = nombreProveedorProducto;
-    }
-
-    //CONSTRUCTOR VISTA RAPIDA  EN MAIN
-
-
-    public ProductoVO(Integer idProducto, String descripcionProducto, String presentacionProducto,
-                      String categoriaProducto, Double precioVentaProducto) {
-        this.idProducto = idProducto;
-        this.descripcionProducto = descripcionProducto;
-        this.presentacionProducto = presentacionProducto;
-        this.categoriaProducto = categoriaProducto;
-        this.precioVentaProducto = precioVentaProducto;
+        this.idProveedorFK = idProveedorFK;
     }
 
     public Integer getIdProducto() {
@@ -87,19 +70,19 @@ public class ProductoVO {
         this.categoriaProducto = categoriaProducto;
     }
 
-    public Double getPrecioCompraProducto() {
+    public double getPrecioCompraProducto() {
         return precioCompraProducto;
     }
 
-    public void setPrecioCompraProducto(Double precioCompraProducto) {
+    public void setPrecioCompraProducto(double precioCompraProducto) {
         this.precioCompraProducto = precioCompraProducto;
     }
 
-    public Double getPrecioVentaProducto() {
+    public double getPrecioVentaProducto() {
         return precioVentaProducto;
     }
 
-    public void setPrecioVentaProducto(Double precioVentaProducto) {
+    public void setPrecioVentaProducto(double precioVentaProducto) {
         this.precioVentaProducto = precioVentaProducto;
     }
 
@@ -119,19 +102,11 @@ public class ProductoVO {
         this.imgProducto = imgProducto;
     }
 
-    public Integer getIdProveedor_fk() {
-        return idProveedor_fk;
+    public Integer getIdProveedorFK() {
+        return idProveedorFK;
     }
 
-    public void setIdProveedor_fk(Integer idProveedor_fk) {
-        this.idProveedor_fk = idProveedor_fk;
-    }
-
-    public String getNombreProveedorProducto() {
-        return nombreProveedorProducto;
-    }
-
-    public void setNombreProveedorProducto(String nombreProveedorProducto) {
-        this.nombreProveedorProducto = nombreProveedorProducto;
+    public void setIdProveedorFK(Integer idProveedorFK) {
+        this.idProveedorFK = idProveedorFK;
     }
 }

@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:background="@color/white">
 
 
     <TextView
@@ -57,41 +58,22 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </com.google.android.material.appbar.AppBarLayout>
-
-
-    <androidx.cardview.widget.CardView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:cardCornerRadius="15sp"
-        android:layout_margin="15sp"
-        android:elevation="15sp"
-        app:cardElevation="15sp"
-        app:contentPadding="10sp"
-
-        >
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            >
-
+            android:layout_marginTop="30sp"
+            android:layout_marginLeft="10sp"
+            android:layout_marginRight="10sp"
+            android:layout_marginBottom="30sp">
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/lvListarProductos"
-                android:layout_width="wrap_content"
+                android:id="@+id/rvCatalogo"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/teal_200"
                 />
-
-
         </LinearLayout>
-
-    </androidx.cardview.widget.CardView>
-
-    <TextView
-        android:id="@+id/txt_pruebaarray"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="NADA SALE EN EL LIST"
-        android:textColor="@color/purple_200"
-        />
+    </ScrollView>
 </LinearLayout>

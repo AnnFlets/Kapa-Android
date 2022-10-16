@@ -23,7 +23,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.krevolorio.myappkapa.basededatossw.ProductoDAO;
 import com.krevolorio.myappkapa.basededatossw.ProductoVO;
-import com.krevolorio.myappkapa.complementos.AdaptadorRecylerProducto;
 
 import org.json.JSONObject;
 
@@ -32,29 +31,17 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity implements Response.Listener<JSONObject>,
         Response.ErrorListener {
 
-    private ProductoVO pdvo = new ProductoVO();
-    private ProductoDAO pddao = new ProductoDAO();
-    RecyclerView recyclerView;
-    TextView txtpruebarray;
+    private ProductoVO pvo = new ProductoVO();
+    private ProductoDAO pdao = new ProductoDAO();
+    private RecyclerView recyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
-        ///MOSTRAR PRODUCTOS
-
-        recyclerView = findViewById(R.id.lvListarProductos);
-        recyclerView.setLayoutManager( new LinearLayoutManager(getApplicationContext()));
-        txtpruebarray = findViewById(R.id.txt_pruebaarray);
-        //txtpruebarray.setText("Aqui si funciona");
-
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        this.onResponse(new JSONObject());
-
 
         ActionBar actionBar = getSupportActionBar();
         getSupportActionBar().setCustomView(R.layout.actionbar);
@@ -77,7 +64,8 @@ public class MainActivity extends AppCompatActivity implements Response.Listener
         });
 
         actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM | ActionBar.DISPLAY_SHOW_HOME);
-
+        recyclerView = findViewById(R.id.rvCatalogo);
+        pdao.listarProductos(pvo, getApplicationContext(), this, this);
     }
 
 
@@ -129,32 +117,49 @@ public class MainActivity extends AppCompatActivity implements Response.Listener
     ///LISTAR MOSTRAR PRODUCTOS
     @Override
     public void onResponse(JSONObject response) {
-
-        ArrayList<ProductoVO> listapd = new ArrayList<>();
-
-
-        if (pddao.respuestaListarMostrar(response) != null) {
-
-            if(!pddao.respuestaListarMostrar(response).get(0).getIdProducto().equals(0)) {
-
-                for (ProductoVO productoVO : pddao.respuestaListarMostrar(response)) {
-                    listapd.add(productoVO);
+        ArrayList<ProductoVO> listaProductos = new ArrayList<>();
+        if (pdao.respuestaListarProductos(response) != null) {
+            if(!pdao.respuestaListarProductos(response).get(0).getIdProducto().equals(0)) {
+                for (ProductoVO productoVO : pdao.respuestaListarProductos(response)) {
+                    listaProductos.add(productoVO);
                 }
             }
+            else {
+                Toast.makeText(this, "No existen datos", Toast.LENGTH_SHORT).show();
+            }
+        } else {
+            Toast.makeText(this, "Error, no existen datos", Toast.LENGTH_SHORT).show();
         }
-        else {
-            Toast.makeText(this,"Error, no existen datos ",Toast.LENGTH_SHORT).show();
-        }
-        AdaptadorRecylerProducto adaptadorRecylerProducto = new AdaptadorRecylerProducto(listapd);
-
-        recyclerView.setAdapter(adaptadorRecylerProducto);
-        txtpruebarray.setText(listapd.toString());
+        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+        AdapterRecyclerProductos adapterRecyclerProductos = new AdapterRecyclerProductos(listaProductos);
+        clickRecycler(adapterRecyclerProductos, listaProductos);
+        recyclerView.setAdapter(adapterRecyclerProductos);
     }
 
     @Override
     public void onErrorResponse(VolleyError error) {
-        System.err.println("ERROR RESPUESTA MAIN LLENAR LISTA: "+error);
+        System.err.println("[Error]: " + error);
     }
 
+    private void clickRecycler(AdapterRecyclerProductos adapterRecyclerProductos, ArrayList<ProductoVO> listaProductos) {
+        adapterRecyclerProductos.setItemClickListener(new ClickListener() {
+            @Override
+            public void itemClick(Integer position, View view) {
+                trasladarInformacion(position, listaProductos);
+            }
+        });
+    }
 
+    private void trasladarInformacion(int position, ArrayList<ProductoVO> productoVO){
+        Intent intent = new Intent(getApplicationContext(), MAInfoProducto.class);
+        intent.putExtra("id", productoVO.get(position).getIdProducto());
+        intent.putExtra("descripcion", productoVO.get(position).getDescripcionProducto());
+        intent.putExtra("marca", productoVO.get(position).getMarcaProducto());
+        intent.putExtra("presentacion", productoVO.get(position).getPresentacionProducto());
+        intent.putExtra("categoria", productoVO.get(position).getCategoriaProducto());
+        intent.putExtra("pventa", productoVO.get(position).getPrecioVentaProducto());
+        intent.putExtra("existencia", productoVO.get(position).getExistenciaProducto());
+        intent.putExtra("img", productoVO.get(position).getImgProducto());
+        startActivity(intent);
+    }
 }
