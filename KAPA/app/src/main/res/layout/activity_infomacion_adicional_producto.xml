@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/textMarca"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Detalle del Producto Seleccionado"
+        android:textColor="#FF8000"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:textAlignment="center"
+        android:layout_margin="15sp"
+        />
+
+    <TextView
+        android:id="@+id/txt_descripcionProducto"
+        android:layout_width="match_parent"
+        android:textAlignment="center"
+        android:layout_height="wrap_content"
+        android:text="Descripción Producto"
+        android:layout_margin="15sp"
+        android:textSize="20sp"
+        android:textColor="@color/black"/>
+    <TextView
+        android:id="@+id/txt_marcaProducto"
+        android:layout_width="match_parent"
+        android:textAlignment="center"
+        android:layout_height="wrap_content"
+        android:text="Marca Producto"
+        android:layout_margin="15sp"
+        android:textSize="20sp"
+        android:textColor="@color/purple_500"/>
+
+    <TextView
+        android:id="@+id/txt_presentacionProducto"
+        android:layout_width="match_parent"
+        android:textAlignment="center"
+        android:layout_height="wrap_content"
+        android:text="Presentación Producto"
+        android:layout_margin="15sp"
+        android:textSize="20sp"
+        android:textColor="@color/purple_500"/>
+
+    <TextView
+        android:id="@+id/txt_categoriaProducto"
+        android:layout_width="match_parent"
+        android:textAlignment="center"
+        android:layout_height="wrap_content"
+        android:text="Categoria Producto"
+        android:layout_margin="15sp"
+        android:textSize="20sp"
+        android:textColor="@color/purple_500"/>
+
+    <TextView
+        android:id="@+id/txt_existenciaProducto"
+        android:layout_width="match_parent"
+        android:textAlignment="center"
+        android:layout_height="wrap_content"
+        android:text="Existencias"
+        android:layout_margin="15sp"
+        android:textSize="30sp"
+        android:textColor="#4CAF50"/>
+
+    <TextView
+        android:id="@+id/txt_precioProducto"
+        android:layout_width="match_parent"
+        android:textAlignment="center"
+        android:layout_height="wrap_content"
+        android:text="Precio Producto Q"
+        android:layout_margin="15sp"
+        android:textSize="30sp"
+        android:textColor="#FF5722"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="#D8D2D2"
+        >
+
+        <TextView
+            android:id="@+id/txt_cantidadCompraProducto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cantidad a Comprar: "
+            android:layout_margin="15sp"
+            android:textSize="20sp"
+            android:textColor="#3F51B5"/>
+
+        <EditText
+            android:id="@+id/edt_cantidadCompraProducto"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:inputType="number"
+            android:text="CANTIDAD"
+            android:textSize="20sp"
+            android:textAlignment="center"
+            />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/txt_total_a_pagar_Producto"
+        android:layout_width="match_parent"
+        android:textAlignment="center"
+        android:layout_height="wrap_content"
+        android:text="Total a pagar Q"
+        android:textSize="30sp"
+        android:textColor="#FF5722"
+        android:paddingTop="20sp"/>
+
+    <Button
+    android:id="@+id/btn_añadirCarrito"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textAlignment="center"
+    android:tooltipText="Añadir al carrito"
+    android:text="Añadir al Carrito!!"
+    android:textSize="20sp"
+    android:layout_marginTop="5sp"
+    android:backgroundTint="#4CAF50"
+    android:layout_gravity="center"
+    />
+    <Button
+        android:id="@+id/btn_finalizarCompra"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:tooltipText="Finalizar Compra"
+        android:text="Finalizar Compra"
+        android:textSize="20sp"
+        android:layout_marginTop="10sp"
+        />
+</LinearLayout>

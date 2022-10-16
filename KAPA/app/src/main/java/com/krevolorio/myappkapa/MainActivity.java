@@ -11,13 +11,34 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-public class MainActivity extends AppCompatActivity {
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.krevolorio.myappkapa.basededatossw.ProductoDAO;
+import com.krevolorio.myappkapa.basededatossw.ProductoVO;
+import com.krevolorio.myappkapa.complementos.AdaptadorRecylerProducto;
+
+import org.json.JSONObject;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
+public class MainActivity extends AppCompatActivity implements Response.Listener<JSONObject>,
+        Response.ErrorListener {
+
+    private ListView listView;
+    private ProductoVO pdvo = new ProductoVO();
+    private ProductoDAO pddao = new ProductoDAO();
+    private RecyclerView recyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
 
         ActionBar actionBar = getSupportActionBar();
         getSupportActionBar().setCustomView(R.layout.actionbar);
@@ -46,8 +68,21 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });
+
         actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM | ActionBar.DISPLAY_SHOW_HOME);
+
+
+    ///MOSTRAR PRODUCTOS
+    //listView = findViewById(R.id.lvListarProductos);
+    //pddao.listarProductos(pdvo,getApplicationContext(),this,this);
+
+    recyclerView = findViewById(R.id.lvListarProductos);
+    recyclerView.setLayoutManager( new LinearLayoutManager(getApplicationContext()));
+
+
     }
+
+
 
     private void aperturaLogin(){
     Intent intent = new Intent(this, MAlogin.class);
@@ -91,4 +126,37 @@ public class MainActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+    ///LISTAR MOSTRAR PRODUCTOS
+    @Override
+    public void onResponse(JSONObject response) {
+
+        ArrayList<ProductoVO> listapd = new ArrayList<>();
+
+        if (pddao.respuestaListarMostrar(response) != null) {
+
+            if(!pddao.respuestaListarMostrar(response).get(0).getIdProducto().equals(0)) {
+
+                for (ProductoVO productoVO : pddao.respuestaListarMostrar(response)) {
+                    listapd.add(productoVO);
+                }
+            }
+
+        }
+        else {
+            Toast.makeText(this,"Error, no existen datos ",Toast.LENGTH_SHORT).show();
+        }
+        //ArrayAdapter arrayAdapterProducto = new ArrayAdapter(this, android.R.layout.simple_list_item_1, listapd);
+        //listView.setAdapter(arrayAdapterProducto);
+
+        AdaptadorRecylerProducto adaptadorRecylerProducto = new AdaptadorRecylerProducto(listapd);
+        recyclerView.setAdapter(adaptadorRecylerProducto);
+    }
+
+    @Override
+    public void onErrorResponse(VolleyError error) {
+        System.err.println("ERROR RESPUESTA MAIN LLENAR LISTA: "+error);
+    }
+
+
 }

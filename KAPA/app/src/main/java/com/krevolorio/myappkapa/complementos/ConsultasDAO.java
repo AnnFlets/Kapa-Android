@@ -8,5 +8,4 @@ public interface ConsultasDAO {
 
     public boolean registroSW(ClienteVO cvo, Context context);
 
-
 }
