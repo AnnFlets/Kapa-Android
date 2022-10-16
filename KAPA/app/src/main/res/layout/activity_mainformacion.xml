@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MAInformacion"
+    android:orientation="vertical"
+    android:background="@color/white">
+    <androidx.cardview.widget.CardView
+        android:layout_width="300sp"
+        android:layout_height="420sp"
+        android:layout_gravity="center_horizontal"
+        android:backgroundTint="@color/white"
+        android:layout_marginTop="150sp"
+        app:cardCornerRadius="20sp"
+        app:cardElevation="50sp"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="KAPA APP"
+                android:textStyle="bold"
+                android:textColor="#5E5E5E"
+                android:textSize="40sp"
+                android:layout_marginTop="50sp"
+                android:gravity="center"
+                android:fontFamily="sans-serif-black"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Versión 1.0"
+                android:textSize="18sp"
+                android:textColor="#858484"
+                android:layout_margin="5sp"
+                android:gravity="center"
+                android:fontFamily="sans-serif-medium"
+                />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="35sp"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="2022 - KAPA"
+                android:textColor="#8E8D8D"
+                android:textSize="18sp"
+                android:gravity="center"
+                android:layout_marginTop="30sp"
+                android:fontFamily="sans-serif-medium"
+                />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+</LinearLayout>
