@@ -8,6 +8,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -16,14 +17,27 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.krevolorio.myappkapa.basededatossw.ClienteDAO;
+import com.krevolorio.myappkapa.basededatossw.ClienteVO;
+import com.krevolorio.myappkapa.basededatossw.UsuarioDAO;
+import com.krevolorio.myappkapa.complementos.ConstanteCliente;
 
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class MAlogin extends AppCompatActivity {
+/**
+ * Clase que se encarga de la lógica para iniciar sesión en la aplicación
+ */
+public class MAlogin extends AppCompatActivity implements Response.Listener<JSONObject>, Response.ErrorListener{
+    private ClienteVO cvo = new ClienteVO();
+    private UsuarioDAO udao = new UsuarioDAO();
     private Button buttonIr;
     EditText edtUsuario, edtPassword;
     Button btnLogin;
+    private ArrayList<ClienteVO> listaClientes = new ArrayList<>();
 
     public MAlogin() {
     }
@@ -36,44 +50,33 @@ public class MAlogin extends AppCompatActivity {
         edtUsuario= findViewById(R.id.edtUsuario);
         edtPassword = findViewById(R.id.edtPassword);
         btnLogin=findViewById(R.id.btnLogin);
+        udao.listarUsuarios(cvo, getApplicationContext(), this, this);
         this.clickIr();
-
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 validarUsuario("https://kapa2022.azurewebsites.net/KapaApiSwRest/validar_client.php");
             }
         });
-
     }
 
     private void validarUsuario (String URL){
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-
-                //String subsResponse = response.substring(0,2);
-
-                //begin
-                //try {
-                //  JSONObject json = new JSONObject(response);
-                //   String nombrecliente = json.getString("cliente");
-                //  System.out.println(nombrecliente);
-                //} catch (JSONException e) {
-                //   e.printStackTrace();
-                //}
-
-                //end
-
                 if (!response.isEmpty()){
-                //  if (subsResponse.toString() == "ok"){
-
-                    Intent intent=new Intent(getApplicationContext(),MAcomprar.class);
+                    for(ClienteVO cliente : listaClientes){
+                        if(cliente.getUsuarioCliente().equals(edtUsuario.getText().toString())
+                        && cliente.getContraCliente().equals(edtPassword.getText().toString())){
+                            ConstanteCliente.CODIGO_CLIENTE = cliente.getIdCliente();
+                            break;
+                        }
+                    }
+                    Intent intent=new Intent(getApplicationContext(),MainActivity.class);
                     startActivity(intent);
                 }else{
                     Toast.makeText(MAlogin.this, "Usuario o contraseña incorrecta, si no estas registrado, registrate", Toast.LENGTH_SHORT).show();
                 }
-
             }
         }, new Response.ErrorListener() {
             @Override
@@ -86,8 +89,6 @@ public class MAlogin extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map <String, String> parametros=new HashMap<String,String>();
-
-
                 parametros.put("usuario",edtUsuario.getText().toString());
                 parametros.put("password", edtPassword.getText().toString());
                 return parametros;
@@ -102,7 +103,27 @@ public class MAlogin extends AppCompatActivity {
     }
     private void aperturaIrregistro(){
         Intent intent = new Intent(this, MAregistro.class);
-                startActivity(intent);
+        startActivity(intent);
+    }
 
+    @Override
+    public void onResponse(JSONObject response) {
+        if (udao.respuestaListarUsuarios(response) != null) {
+            if(!udao.respuestaListarUsuarios(response).get(0).getIdCliente().equals(0)) {
+                for (ClienteVO usuarioVO : udao.respuestaListarUsuarios(response)) {
+                    listaClientes.add(usuarioVO);
+                }
+            }
+            else {
+                Toast.makeText(this, "No existen datos", Toast.LENGTH_SHORT).show();
+            }
+        } else {
+            Toast.makeText(this, "Error, no existen datos", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    public void onErrorResponse(VolleyError error) {
+        System.err.println("[Error]: " + error);
     }
 }

@@ -17,6 +17,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+
 /**
  * Clase que contiene los métodos para realizar distintas consultas a la base de datos,
  * referente a los usuarios (se utilizará en el apartado de Configuraciones)
@@ -66,6 +68,44 @@ public class UsuarioDAO implements ConsultasUsuarioDAO, Response.Listener<JSONOb
             e.printStackTrace();
         }
         return resultado;
+    }
+
+    @Override
+    public boolean listarUsuarios(ClienteVO cvo, Context context, Response.Listener listener, Response.ErrorListener errorListener) {
+        boolean resultado = false;
+        try {
+            String url = Constantes.IPSERVER+"KapaApiSwRest/listarusuarios.php";
+            RequestQueue requestQueue = Volley.newRequestQueue(context);
+            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET,url,null,
+                    listener, errorListener);
+            requestQueue.add(jsonObjectRequest);
+            resultado = true;
+        }
+        catch (Exception e){
+            Toast.makeText(context, "Error en la conexión " + e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+        return resultado;
+    }
+
+    @Override
+    public ArrayList<ClienteVO> respuestaListarUsuarios(JSONObject respuesta) {
+        ArrayList<ClienteVO> clientes = new ArrayList<>();
+        JSONArray jsonArray = respuesta.optJSONArray("cliente");
+        try {
+            for (int i = 0; i < jsonArray.length(); i++) {
+                ClienteVO cvo = new ClienteVO();
+                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                cvo.setIdCliente(jsonObject.optInt("id_cliente"));
+                cvo.setUsuarioCliente(jsonObject.optString("usuario_cliente"));
+                cvo.setContraCliente(jsonObject.optString("contrasenia_cliente"));
+                clientes.add(cvo);
+            }
+        }
+        catch (JSONException e){
+            System.err.println(e.getMessage());
+            e.printStackTrace();
+        }
+        return clientes;
     }
 
     @Override

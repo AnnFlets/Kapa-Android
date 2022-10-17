@@ -6,5 +6,5 @@ package com.krevolorio.myappkapa.complementos;
  * información del mismo
  */
 public class ConstanteCliente {
-    public static Integer CODIGO_CLIENTE = 1;
+    public static Integer CODIGO_CLIENTE = 0;
 }

@@ -8,11 +8,6 @@
         app:showAsAction="never"
         />
     <item
-        android:id="@+id/comprar"
-        android:title="Comprar"
-        app:showAsAction="never"
-        />
-    <item
         android:id="@+id/detalleCompra"
         android:title="Detalle de compra"
         app:showAsAction="never"
@@ -35,6 +30,11 @@
     <item
         android:id="@+id/informacion"
         android:title="Información de la APP"
+        app:showAsAction="never"
+        />
+    <item
+        android:id="@+id/cerrar"
+        android:title="Logout"
         app:showAsAction="never"
         />
 </menu>

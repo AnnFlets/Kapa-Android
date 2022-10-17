@@ -7,6 +7,8 @@ import com.krevolorio.myappkapa.basededatossw.ClienteVO;
 
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+
 /**
  * Interfaz que contiene la declaración de los métodos para realizar
  * las consultas del cliente para el apartado de configuraciones
@@ -14,5 +16,7 @@ import org.json.JSONObject;
 public interface ConsultasUsuarioDAO {
     public boolean buscarUsuario(ClienteVO cvo, Context context, Response.Listener listener, Response.ErrorListener errorListener);
     public boolean respuestaBusquedaUsuario(ClienteVO cvo, JSONObject respuesta);
+    public boolean listarUsuarios(ClienteVO cvo, Context context, Response.Listener listener, Response.ErrorListener errorListener);
+    public ArrayList<ClienteVO> respuestaListarUsuarios(JSONObject respuesta);
     public boolean actualizarUsuario(ClienteVO cvo, Context context);
 }

@@ -107,12 +107,7 @@ public class MainActivity extends AppCompatActivity implements Response.Listener
      * Métodos para aperturar o abrir las demás actividades
      */
     private void aperturaLogin(){
-    Intent intent = new Intent(this, MAlogin.class);
-    startActivity(intent);
-    }
-
-    private void aperturaComprar(){
-        Intent intent = new Intent(this, MAcomprar.class);
+        Intent intent = new Intent(this, MAlogin.class);
         startActivity(intent);
     }
 
@@ -157,12 +152,12 @@ public class MainActivity extends AppCompatActivity implements Response.Listener
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
             case R.id.login:
-                Toast.makeText(this, "Ir a Login", Toast.LENGTH_SHORT).show();
-                aperturaLogin();
-                break;
-            case R.id.comprar:
-                Toast.makeText(this, "Necesita hacer login", Toast.LENGTH_SHORT).show();
-                aperturaComprar();
+                if(ConstanteCliente.CODIGO_CLIENTE == 0){
+                    Toast.makeText(this, "Ir a Login", Toast.LENGTH_SHORT).show();
+                    aperturaLogin();
+                }else{
+                    Toast.makeText(this, "Ya hay una sesión activa", Toast.LENGTH_SHORT).show();
+                }
                 break;
             case R.id.detalleCompra:
                 if(ConstanteCliente.CODIGO_CLIENTE == 0){
@@ -195,6 +190,14 @@ public class MainActivity extends AppCompatActivity implements Response.Listener
             case R.id.informacion:
                 Toast.makeText(this, "Ver información de la APP", Toast.LENGTH_SHORT).show();
                 aperturaInformacion();
+                break;
+            case R.id.cerrar:
+                if(ConstanteCliente.CODIGO_CLIENTE == 0){
+                    Toast.makeText(this, "No se ha logueado", Toast.LENGTH_SHORT).show();
+                }else{
+                    ConstanteCliente.CODIGO_CLIENTE = 0;
+                    Toast.makeText(this, "Salió de la sesión", Toast.LENGTH_SHORT).show();
+                }
                 break;
         }
         return super.onOptionsItemSelected(item);
