@@ -4,6 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
+/**
+ * Clase de la vista de Información de la APP
+ */
 public class MAInformacion extends AppCompatActivity {
 
     @Override

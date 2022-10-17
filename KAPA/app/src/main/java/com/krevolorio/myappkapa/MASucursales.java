@@ -16,6 +16,9 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+/**
+ * Clase dedicada a la lógica para la visualización de sucursales
+ */
 public class MASucursales extends AppCompatActivity implements Response.Listener<JSONObject>, Response.ErrorListener{
     private SucursalVO svo = new SucursalVO();
     private SucursalDAO sdao = new SucursalDAO();

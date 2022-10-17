@@ -12,6 +12,9 @@ import com.krevolorio.myappkapa.basededatossw.SucursalVO;
 
 import java.util.ArrayList;
 
+/**
+ * Clase que contiene los métodos para el adaptador del recyclerview de sucursales
+ */
 public class AdapterRecyclerSucursal extends RecyclerView.Adapter<AdapterRecyclerSucursal.ViewHolder>{
     private ArrayList<SucursalVO> sucursales = new ArrayList<>();
 

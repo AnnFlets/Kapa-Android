@@ -24,14 +24,19 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.krevolorio.myappkapa.basededatossw.ProductoDAO;
 import com.krevolorio.myappkapa.basededatossw.ProductoVO;
+import com.krevolorio.myappkapa.complementos.ConstanteCliente;
 
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+/**
+ * Clase de la actividad principal, donde se visualiza el catálogo de productos y
+ * se permite la búsqueda de los mismos. También posee un menú con opciones a las
+ * cuales el cliente puede acceder dependiendo de si inició sesión o no
+ */
 public class MainActivity extends AppCompatActivity implements Response.Listener<JSONObject>,
         Response.ErrorListener {
-
     private ProductoVO pvo = new ProductoVO();
     private ProductoDAO pdao = new ProductoDAO();
     private RecyclerView recyclerView;
@@ -43,16 +48,12 @@ public class MainActivity extends AppCompatActivity implements Response.Listener
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         buttonMostrarTodoProducto = findViewById(R.id.btnMostrarTodoProducto);
-
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
         ActionBar actionBar = getSupportActionBar();
         getSupportActionBar().setCustomView(R.layout.actionbar);
-
         EditText edtBuscar = (EditText) actionBar.getCustomView().findViewById(R.id.buscar);
         ImageButton imgBuscar = (ImageButton) actionBar.getCustomView().findViewById(R.id.imgBuscar);
-
         imgBuscar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -101,6 +102,10 @@ public class MainActivity extends AppCompatActivity implements Response.Listener
         recyclerView.setAdapter(adapterRecyclerProductos);
     }
 
+
+    /**
+     * Métodos para aperturar o abrir las demás actividades
+     */
     private void aperturaLogin(){
     Intent intent = new Intent(this, MAlogin.class);
     startActivity(intent);
@@ -116,7 +121,25 @@ public class MainActivity extends AppCompatActivity implements Response.Listener
         startActivity(intent);
     }
 
+    private void aperturaPedidos(){
+        Intent intent = new Intent(this, MAPedidos.class);
+        startActivity(intent);
+    }
 
+    private void aperturaSucursales(){
+        Intent intent = new Intent(this, MASucursales.class);
+        startActivity(intent);
+    }
+
+    private void aperturaConfiguraciones(){
+        Intent intent = new Intent(this, MAConfiguraciones.class);
+        startActivity(intent);
+    }
+
+    private void aperturaInformacion(){
+        Intent intent = new Intent(this, MAInformacion.class);
+        startActivity(intent);
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -125,10 +148,14 @@ public class MainActivity extends AppCompatActivity implements Response.Listener
         return true;
     }
 
+    /**
+     * Administra la selección de opciones disponibles en el menú
+     * @param item -> Representa las opciones existentes
+     * @return
+     */
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
-
             case R.id.login:
                 Toast.makeText(this, "Ir a Login", Toast.LENGTH_SHORT).show();
                 aperturaLogin();
@@ -138,14 +165,41 @@ public class MainActivity extends AppCompatActivity implements Response.Listener
                 aperturaComprar();
                 break;
             case R.id.detalleCompra:
-                Toast.makeText(this, "Ver detalle de compra", Toast.LENGTH_SHORT).show();
-                aperturaDetallecompra();
+                if(ConstanteCliente.CODIGO_CLIENTE == 0){
+                    Toast.makeText(this, "Debe iniciar sesión", Toast.LENGTH_SHORT).show();
+                }else{
+                    Toast.makeText(this, "Ver detalle de compra", Toast.LENGTH_SHORT).show();
+                    aperturaDetallecompra();
+                }
+                break;
+            case R.id.pedidos:
+                if(ConstanteCliente.CODIGO_CLIENTE == 0){
+                    Toast.makeText(this, "Debe iniciar sesión", Toast.LENGTH_SHORT).show();
+                }else{
+                    Toast.makeText(this, "Ver mis pedidos", Toast.LENGTH_SHORT).show();
+                    aperturaPedidos();
+                }
+                break;
+            case R.id.sucursales:
+                Toast.makeText(this, "Ver nuestras sucursales", Toast.LENGTH_SHORT).show();
+                aperturaSucursales();
+                break;
+            case R.id.configuraciones:
+                if(ConstanteCliente.CODIGO_CLIENTE == 0){
+                    Toast.makeText(this, "Debe iniciar sesión", Toast.LENGTH_SHORT).show();
+                }else{
+                    Toast.makeText(this, "Ver configuraciones", Toast.LENGTH_SHORT).show();
+                    aperturaConfiguraciones();
+                }
+                break;
+            case R.id.informacion:
+                Toast.makeText(this, "Ver información de la APP", Toast.LENGTH_SHORT).show();
+                aperturaInformacion();
                 break;
         }
         return super.onOptionsItemSelected(item);
     }
 
-    ///LISTAR MOSTRAR PRODUCTOS
     @Override
     public void onResponse(JSONObject response) {
         if (pdao.respuestaListarProductos(response) != null) {
@@ -166,6 +220,11 @@ public class MainActivity extends AppCompatActivity implements Response.Listener
         recyclerView.setAdapter(adapterRecyclerProductos);
     }
 
+    /**
+     * Método que administra las pulsaciones en los item del recyclerview
+     * @param adapterRecyclerProductos -> Adaptador del recyclerview
+     * @param listaProductos -> Arreglo con los productos existentes en la base de datos
+     */
     private void clickRecycler(AdapterRecyclerProductos adapterRecyclerProductos, ArrayList<ProductoVO> listaProductos) {
         adapterRecyclerProductos.setItemClickListener(new ClickListener() {
             @Override
@@ -175,6 +234,12 @@ public class MainActivity extends AppCompatActivity implements Response.Listener
         });
     }
 
+    /**
+     * Método para enviar la información del producto seleccionado a la actividad
+     * de información del producto
+     * @param position -> Representa la posición o elemento seleccionado
+     * @param productoVO -> Es el arreglo con los productos existentes en la base de datos
+     */
     private void trasladarInformacion(int position, ArrayList<ProductoVO> productoVO){
         Intent intent = new Intent(getApplicationContext(), MAInfoProducto.class);
         intent.putExtra("id", productoVO.get(position).getIdProducto());
