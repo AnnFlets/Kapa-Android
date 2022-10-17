@@ -10,7 +10,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.krevolorio.myappkapa.complementos.Constantes;
-import com.krevolorio.myappkapa.complementos.ConsultasSucursalDAO;
+import com.krevolorio.myappkapa.complementos.ConsultasPedidoDAO;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -20,15 +20,15 @@ import java.util.ArrayList;
 
 /**
  * Clase que contiene los métodos para realizar distintas consultas a la base de datos,
- * referente a las sucursales
+ * referente a los pedidos
  */
-public class SucursalDAO implements ConsultasSucursalDAO, Response.Listener<JSONObject>, Response.ErrorListener{
+public class PedidoDAO implements ConsultasPedidoDAO, Response.Listener<JSONObject>, Response.ErrorListener{
 
     @Override
-    public boolean listarSucursales(SucursalVO svo, Context context, Response.Listener listener, Response.ErrorListener errorListener) {
+    public boolean listarPedidos(PedidoVO pevo, Context context, Response.Listener listener, Response.ErrorListener errorListener) {
         boolean resultado = false;
         try {
-            String url = Constantes.IPSERVER+"KapaApiSwRest/listarsucursales.php";
+            String url = Constantes.IPSERVER+"KapaApiSwRest/listarpedidos.php";
             RequestQueue requestQueue = Volley.newRequestQueue(context);
             JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET,url,null,
                     listener, errorListener);
@@ -42,25 +42,29 @@ public class SucursalDAO implements ConsultasSucursalDAO, Response.Listener<JSON
     }
 
     @Override
-    public ArrayList<SucursalVO> respuestaListarSucursales(JSONObject respuesta) {
-        ArrayList<SucursalVO> sucursales = new ArrayList<>();
-        JSONArray jsonArray = respuesta.optJSONArray("sucursal");
+    public ArrayList<PedidoVO> respuestaListarPedidos(JSONObject respuesta) {
+        ArrayList<PedidoVO> pedidos = new ArrayList<>();
+        JSONArray jsonArray = respuesta.optJSONArray("factura");
         try {
             for (int i = 0; i < jsonArray.length(); i++) {
-                SucursalVO svo = new SucursalVO();
+                PedidoVO pevo = new PedidoVO();
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
-                svo.setIdSucursal(jsonObject.optInt("id_sucursal"));
-                svo.setNombreSucursal(jsonObject.optString("nombre_sucursal"));
-                svo.setTelefonoSucursal(jsonObject.optString("telefono_sucursal"));
-                svo.setDireccionSucursal(jsonObject.optString("direccion_sucursal"));
-                sucursales.add(svo);
+                pevo.setIdFactura(jsonObject.optInt("id_factura"));
+                pevo.setNumeroFactura(jsonObject.optInt("numero_factura"));
+                pevo.setSerieFactura(jsonObject.optString("serie_factura"));
+                pevo.setFechaFactura(jsonObject.optString("fecha_factura"));
+                pevo.setTotalFactura(jsonObject.optDouble("total_factura"));
+                pevo.setTipoPagoFactura(jsonObject.optString("tipo_pago_factura"));
+                pevo.setEstadoFactura(jsonObject.optString("estado_factura"));
+                pevo.setIdClienteFK(jsonObject.optInt("id_cliente_fk"));
+                pedidos.add(pevo);
             }
         }
         catch (JSONException e){
             System.err.println(e.getMessage());
             e.printStackTrace();
         }
-        return sucursales;
+        return pedidos;
     }
 
     @Override

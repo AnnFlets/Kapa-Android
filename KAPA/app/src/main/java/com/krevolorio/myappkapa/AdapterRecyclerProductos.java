@@ -13,6 +13,9 @@ import com.krevolorio.myappkapa.basededatossw.ProductoVO;
 
 import java.util.ArrayList;
 
+/**
+ * Clase que contiene los métodos para el adaptador del recyclerview de productos
+ */
 public class AdapterRecyclerProductos extends RecyclerView.Adapter<AdapterRecyclerProductos.ViewHolder>{
     private static ClickListener clickListener;
     private ArrayList<ProductoVO> productos = new ArrayList<>();
@@ -67,6 +70,11 @@ public class AdapterRecyclerProductos extends RecyclerView.Adapter<AdapterRecycl
         }
     }
 
+    /**
+     * Método que devuelve el ID de la imagen correspondiente al producto
+     * @param img -> Representa el identificador de la imagen perteneciente a un producto
+     * @return -> Retorna el ID de la imagen almacenada en el proyecto
+     */
     private int imgProducto(String img){
         int imagenProducto;
         if(img.equals("img001.png")){

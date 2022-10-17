@@ -17,4 +17,24 @@
         android:title="Detalle de compra"
         app:showAsAction="never"
         />
+    <item
+        android:id="@+id/pedidos"
+        android:title="Mis pedidos"
+        app:showAsAction="never"
+        />
+    <item
+        android:id="@+id/configuraciones"
+        android:title="Configuraciones"
+        app:showAsAction="never"
+        />
+    <item
+        android:id="@+id/sucursales"
+        android:title="Nuestras sucursales"
+        app:showAsAction="never"
+        />
+    <item
+        android:id="@+id/informacion"
+        android:title="Información de la APP"
+        app:showAsAction="never"
+        />
 </menu>
