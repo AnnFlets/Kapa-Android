@@ -1,16 +1,13 @@
 package com.krevolorio.myappkapa;
 
-import static android.os.Build.VERSION_CODES.M;
-
-//import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -20,7 +17,6 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
-import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -28,9 +24,6 @@ public class MAlogin extends AppCompatActivity {
     private Button buttonIr;
     EditText edtUsuario, edtPassword;
     Button btnLogin;
-
-
-
 
     public MAlogin() {
     }
@@ -58,15 +51,37 @@ public class MAlogin extends AppCompatActivity {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                if (!response.isEmpty())  {
-                    Intent intent = new Intent(getApplicationContext(), MAcomprar.class);
+
+                //String subsResponse = response.substring(0,2);
+
+                //begin
+                //try {
+                //  JSONObject json = new JSONObject(response);
+                //   String nombrecliente = json.getString("cliente");
+                //  System.out.println(nombrecliente);
+                //} catch (JSONException e) {
+                //   e.printStackTrace();
+                //}
+
+                //end
+
+                if (!response.isEmpty()){
+                //  if (subsResponse.toString() == "ok"){
+
+                    Intent intent=new Intent(getApplicationContext(),MAcomprar.class);
                     startActivity(intent);
-                } else {
-                    Toast.makeText(MAlogin.this, "Usuario o contraseña incorrecta", Toast.LENGTH_SHORT).show();
+                }else{
+                    Toast.makeText(MAlogin.this, "Usuario o contraseña incorrecta, si no estas registrado, registrate", Toast.LENGTH_SHORT).show();
                 }
 
             }
-        }, error -> Toast.makeText(MAlogin.this, error.toString(), Toast.LENGTH_SHORT).show()){
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(MAlogin.this, error.toString(), Toast.LENGTH_SHORT).show();
+
+            }
+        }){
             //@Nullable
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
