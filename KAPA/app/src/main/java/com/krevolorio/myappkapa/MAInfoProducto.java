@@ -8,6 +8,9 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.krevolorio.myappkapa.basededatossw.DetalleVO;
+import com.krevolorio.myappkapa.complementos.Constantes;
+
 public class MAInfoProducto extends AppCompatActivity {
 
     private ImageView imageView;
@@ -104,8 +107,23 @@ public class MAInfoProducto extends AppCompatActivity {
         buttonAniadirCarrito.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                agregarArray();
             }
         });
+    }
+
+    private void agregarArray(){
+
+        if (Integer.parseInt(textViewCantidad.getText().toString()) != 0){
+            DetalleVO datos = new DetalleVO();
+            datos.setCantidad(Integer.parseInt(textViewCantidad.getText().toString()));
+            datos.setDescripcion(textViewDescripcion.getText().toString());
+            datos.setPrecio(precioProducto);
+            datos.setSubtotal(total);
+            Constantes.listaDetalle.add(datos);
+
+        }
+
     }
 
     private void disminuirCantidadProducto(){
