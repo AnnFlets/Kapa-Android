@@ -58,6 +58,16 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </com.google.android.material.appbar.AppBarLayout>
+    <Button
+        android:id="@+id/btnMostrarTodoProducto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Mostrar todos los productos"
+        android:backgroundTint="#62D1E4"
+        android:textColor="@color/white"
+        android:layout_gravity="center"
+        android:layout_margin="20sp"
+        />
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">

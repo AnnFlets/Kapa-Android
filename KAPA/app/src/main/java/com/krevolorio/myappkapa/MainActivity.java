@@ -11,6 +11,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -34,11 +35,14 @@ public class MainActivity extends AppCompatActivity implements Response.Listener
     private ProductoVO pvo = new ProductoVO();
     private ProductoDAO pdao = new ProductoDAO();
     private RecyclerView recyclerView;
+    private Button buttonMostrarTodoProducto;
+    private ArrayList<ProductoVO> listaProductos = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        buttonMostrarTodoProducto = findViewById(R.id.btnMostrarTodoProducto);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -46,29 +50,56 @@ public class MainActivity extends AppCompatActivity implements Response.Listener
         ActionBar actionBar = getSupportActionBar();
         getSupportActionBar().setCustomView(R.layout.actionbar);
 
-        final EditText buscar = (EditText) actionBar.getCustomView().findViewById(R.id.buscar);
+        EditText edtBuscar = (EditText) actionBar.getCustomView().findViewById(R.id.buscar);
         ImageButton imgBuscar = (ImageButton) actionBar.getCustomView().findViewById(R.id.imgBuscar);
 
         imgBuscar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(MainActivity.this, "Buscar desde boton" + buscar.getText().toString(), Toast.LENGTH_SHORT).show();
+                buscarProducto(edtBuscar);
             }
         });
-        buscar.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
-                Toast.makeText(MainActivity.this, "Buscar desde Enter" + buscar.getText().toString(), Toast.LENGTH_SHORT).show();
-                return false;
-            }
-        });
-
         actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM | ActionBar.DISPLAY_SHOW_HOME);
         recyclerView = findViewById(R.id.rvCatalogo);
         pdao.listarProductos(pvo, getApplicationContext(), this, this);
+        this.click();
     }
 
+    private void click() {
+        buttonMostrarTodoProducto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mostrarProductos();
+            }
+        });
+    }
 
+    private void buscarProducto(EditText edtBuscar){
+        String productoB = String.valueOf(edtBuscar.getText());
+        ArrayList<ProductoVO> productoFiltrado = new ArrayList<>();
+        for(ProductoVO proVO : listaProductos){
+            if(proVO.getMarcaProducto().toUpperCase().contains(productoB.toUpperCase())
+            || proVO.getDescripcionProducto().toUpperCase().contains(productoB.toUpperCase())){
+                productoFiltrado.add(proVO);
+            }
+        }
+        if(productoFiltrado.size() > 0){
+            recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+            AdapterRecyclerProductos adapterRecyclerProductos = new AdapterRecyclerProductos(productoFiltrado);
+            clickRecycler(adapterRecyclerProductos, productoFiltrado);
+            recyclerView.setAdapter(adapterRecyclerProductos);
+            Toast.makeText(this, "Se buscó: " + edtBuscar.getText(), Toast.LENGTH_SHORT).show();
+        }else{
+            Toast.makeText(this, "No hay productos con esa descripción o marca", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void mostrarProductos(){
+        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+        AdapterRecyclerProductos adapterRecyclerProductos = new AdapterRecyclerProductos(listaProductos);
+        clickRecycler(adapterRecyclerProductos, listaProductos);
+        recyclerView.setAdapter(adapterRecyclerProductos);
+    }
 
     private void aperturaLogin(){
     Intent intent = new Intent(this, MAlogin.class);
@@ -117,7 +148,6 @@ public class MainActivity extends AppCompatActivity implements Response.Listener
     ///LISTAR MOSTRAR PRODUCTOS
     @Override
     public void onResponse(JSONObject response) {
-        ArrayList<ProductoVO> listaProductos = new ArrayList<>();
         if (pdao.respuestaListarProductos(response) != null) {
             if(!pdao.respuestaListarProductos(response).get(0).getIdProducto().equals(0)) {
                 for (ProductoVO productoVO : pdao.respuestaListarProductos(response)) {
@@ -134,11 +164,6 @@ public class MainActivity extends AppCompatActivity implements Response.Listener
         AdapterRecyclerProductos adapterRecyclerProductos = new AdapterRecyclerProductos(listaProductos);
         clickRecycler(adapterRecyclerProductos, listaProductos);
         recyclerView.setAdapter(adapterRecyclerProductos);
-    }
-
-    @Override
-    public void onErrorResponse(VolleyError error) {
-        System.err.println("[Error]: " + error);
     }
 
     private void clickRecycler(AdapterRecyclerProductos adapterRecyclerProductos, ArrayList<ProductoVO> listaProductos) {
@@ -161,5 +186,10 @@ public class MainActivity extends AppCompatActivity implements Response.Listener
         intent.putExtra("existencia", productoVO.get(position).getExistenciaProducto());
         intent.putExtra("img", productoVO.get(position).getImgProducto());
         startActivity(intent);
+    }
+
+    @Override
+    public void onErrorResponse(VolleyError error) {
+        System.err.println("[Error]: " + error);
     }
 }
