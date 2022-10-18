@@ -1,13 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+
     <TextView
-        android:id="@+id/idDato"
+        android:id="@+id/idCantidad"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="mensaje"/>
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="25dp"
+        android:text="Cantidad"
+        android:textSize="12dp" />
+
+    <TextView
+        android:id="@+id/idDescripcion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="208dp"
+        android:text="Descripcion"
+        android:textSize="12dp" />
+
+    <TextView
+        android:id="@+id/idSubtotal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="26dp"
+        android:text="Subtotal"
+        android:textSize="12dp" />
+
+    <TextView
+        android:id="@+id/idPrecio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="134dp"
+        android:text="Precio"
+        android:textSize="12dp" />
 
 
-</LinearLayout>
+</RelativeLayout>

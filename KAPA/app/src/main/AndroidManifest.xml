@@ -24,6 +24,16 @@
             android:exported="false"
             android:parentActivityName=".MainActivity" />
         <activity
+            android:name=".MAInfoProducto"
+            android:exported="false"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".MAConfiguraciones"
+            android:exported="false" />
+        <activity
+            android:name=".MASucursales"
+            android:exported="false" />
+        <activity
             android:name=".MAcomprar"
             android:exported="false"
             android:parentActivityName=".MainActivity" />

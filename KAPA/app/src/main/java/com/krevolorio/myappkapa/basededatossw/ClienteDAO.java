@@ -44,6 +44,8 @@ public class ClienteDAO implements ConsultasDAO, Response.Listener<JSONObject>, 
     }
 
 
+
+
     @Override
     public void onErrorResponse(VolleyError error) {
 

@@ -1,6 +1,7 @@
 package com.krevolorio.myappkapa.basededatossw;
 
 public class DetalleVO {
+    private int idProducto;
     private int cantidad;
     private String descripcion;
     private double precio;
@@ -11,12 +12,12 @@ public class DetalleVO {
 
     }
 
-    public DetalleVO(int cantidad, String descripcion, int precio, int subtotal, int total) {
-        this.cantidad = cantidad;
-        this.descripcion = descripcion;
-        this.precio = precio;
-        this.subtotal = subtotal;
-        this.total = total;
+    public int getIdProducto() {
+        return idProducto;
+    }
+
+    public void setIdProducto(int idProducto) {
+        this.idProducto = idProducto;
     }
 
     public int getCantidad() {

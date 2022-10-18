@@ -162,6 +162,7 @@ public class MainActivity extends AppCompatActivity implements Response.Listener
             case R.id.detalleCompra:
                 if(ConstanteCliente.CODIGO_CLIENTE == 0){
                     Toast.makeText(this, "Debe iniciar sesión", Toast.LENGTH_SHORT).show();
+                    aperturaDetallecompra();
                 }else{
                     Toast.makeText(this, "Ver detalle de compra", Toast.LENGTH_SHORT).show();
                     aperturaDetallecompra();

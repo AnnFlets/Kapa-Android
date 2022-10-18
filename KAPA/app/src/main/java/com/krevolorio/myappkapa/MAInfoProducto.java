@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.krevolorio.myappkapa.basededatossw.DetalleVO;
 import com.krevolorio.myappkapa.complementos.Constantes;
@@ -120,7 +121,12 @@ public class MAInfoProducto extends AppCompatActivity {
             datos.setDescripcion(textViewDescripcion.getText().toString());
             datos.setPrecio(precioProducto);
             datos.setSubtotal(total);
+            datos.setIdProducto(Integer.parseInt(textViewId.getText().toString()));
             Constantes.listaDetalle.add(datos);
+            Toast.makeText(this, "Producto agregado al carrito!", Toast.LENGTH_SHORT).show();
+
+        }else {
+            Toast.makeText(this, "Ingrese una cantidad!", Toast.LENGTH_SHORT).show();
 
         }
 

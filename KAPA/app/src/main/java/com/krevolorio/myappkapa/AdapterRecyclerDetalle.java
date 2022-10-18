@@ -14,7 +14,7 @@ import java.util.ArrayList;
 
 public class AdapterRecyclerDetalle extends RecyclerView.Adapter<AdapterRecyclerDetalle.ViewHolder> {
 
-    ArrayList<DetalleVO> listaDatos;
+    private ArrayList<DetalleVO> listaDatos = new ArrayList<>();
 
     public AdapterRecyclerDetalle(ArrayList<DetalleVO> listaDatos) {
         this.listaDatos = listaDatos;
@@ -24,7 +24,8 @@ public class AdapterRecyclerDetalle extends RecyclerView.Adapter<AdapterRecycler
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_list,null,false );
-        return  new ViewHolder(view);
+        ViewHolder viewHolder = new ViewHolder(view);
+        return  viewHolder;
     }
 
     @Override
@@ -40,15 +41,21 @@ public class AdapterRecyclerDetalle extends RecyclerView.Adapter<AdapterRecycler
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        TextView dato;
+        private TextView textViewCantidad, textViewPrecio, textViewSubtotal, textViewDescripcion;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            dato= (TextView) itemView.findViewById(R.id.idDato);
+            textViewCantidad = itemView.findViewById(R.id.idCantidad);
+            textViewPrecio = itemView.findViewById(R.id.idPrecio);
+            textViewSubtotal = itemView.findViewById(R.id.idSubtotal);
+            textViewDescripcion = itemView.findViewById(R.id.idDescripcion);
         }
 
         public void asignarDatos(DetalleVO datos) {
-            dato.setText((CharSequence) datos);
+            textViewPrecio.setText("Q. "+String.valueOf(datos.getPrecio()));
+            textViewCantidad.setText(String.valueOf(datos.getCantidad()));
+            textViewDescripcion.setText(datos.getDescripcion());
+            textViewSubtotal.setText("Q. "+String.valueOf(datos.getSubtotal()));
         }
     }
 }

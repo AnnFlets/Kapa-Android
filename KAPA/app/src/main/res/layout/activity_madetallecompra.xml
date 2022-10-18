@@ -7,6 +7,8 @@
     tools:context=".MAdetallecompra"
     android:stretchColumns="1,2,3,4"
     android:layout_margin="8dp">
+>
+
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -54,13 +56,12 @@
         android:id="@+id/txtTotal"
         android:layout_width="match_parent"
         android:layout_height="45sp"
+        android:inputType="none"
         android:text="TOTAL:"
         android:textColor="@color/black"
         android:textSize="20sp"
         android:textStyle="bold"
         />
-
-
     <TableRow>
         <TextView
             android:text="QTY"
@@ -94,7 +95,8 @@
 
     </TableRow>
 
-        <androidx.recyclerview.widget.RecyclerView
+
+    <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerDatos"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
