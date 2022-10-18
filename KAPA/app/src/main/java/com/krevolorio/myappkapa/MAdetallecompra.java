@@ -1,10 +1,12 @@
 package com.krevolorio.myappkapa;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -31,6 +33,7 @@ import java.time.LocalDateTime;
 public class MAdetallecompra extends AppCompatActivity implements  Response.Listener<JSONObject>, Response.ErrorListener {
 
 
+    private String opcion = "Efectivo";
     FloatingActionButton btnPagar, btnQuitar;
     private int contar;
     SimpleDateFormat fecha = new SimpleDateFormat("yyyy-MM-dd");
@@ -64,6 +67,7 @@ public class MAdetallecompra extends AppCompatActivity implements  Response.List
         editTextTotal = findViewById(R.id.txtTotal);
         btnPagar = findViewById(R.id.pagar);
         btnQuitar = findViewById(R.id.cancelar);
+        abrirDialogo();
         cargarCliente();
         this.clickPagar();
         this.clickQuitar();
@@ -88,7 +92,15 @@ public class MAdetallecompra extends AppCompatActivity implements  Response.List
         btnPagar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                crearFactura();
+
+
+
+
+                    crearFactura();
+
+
+
+
             }
         });
     }
@@ -121,6 +133,28 @@ public class MAdetallecompra extends AppCompatActivity implements  Response.List
         }
     }
 
+    private void abrirDialogo(){
+        new AlertDialog.Builder(this)
+            .setTitle("Elija el metodo de pago")
+                .setMessage("Cual metodo desea elegir?")
+            .setPositiveButton("Efectivo", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                opcion = "Efectivo";
+            }
+        })
+                .setNegativeButton("Tarjeta", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        opcion = "Tarjeta";
+
+                    }
+                })
+                .show();
+
+
+    }
+
 
 
     private void crearFactura(){
@@ -131,7 +165,7 @@ public class MAdetallecompra extends AppCompatActivity implements  Response.List
                 fvo.setSerieFactura("A");
                 fvo.setFechaFactura(java.sql.Date.valueOf(fecha.format(date)));
                 fvo.setTotalFactura(calcularTotal());
-                fvo.setTipoPagoFactura("Efectivo");
+                fvo.setTipoPagoFactura(opcion);
                 fvo.setEstadoFactura("Pendiente");
                 fvo.setIdClienteFactura(ConstanteCliente.CODIGO_CLIENTE);
 
@@ -158,6 +192,8 @@ public class MAdetallecompra extends AppCompatActivity implements  Response.List
 
             }
 
+        }else{
+            Toast.makeText(this, "Agregue productos al carrito", Toast.LENGTH_SHORT).show();
         }
 
 
