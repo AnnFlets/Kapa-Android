@@ -127,7 +127,7 @@ public class MAdetallecompra extends AppCompatActivity implements  Response.List
 
         if (Constantes.listaDetalle.isEmpty() == false){
             if (ConstanteCliente.CODIGO_CLIENTE != 0){
-                fvo.setNumeroFactura(10);
+                fvo.setNumeroFactura((int)(Math.random() * (1000-1)) + 1);
                 fvo.setSerieFactura("A");
                 fvo.setFechaFactura(java.sql.Date.valueOf(fecha.format(date)));
                 fvo.setTotalFactura(calcularTotal());
