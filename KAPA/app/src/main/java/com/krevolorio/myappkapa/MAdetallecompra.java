@@ -142,6 +142,7 @@ public class MAdetallecompra extends AppCompatActivity implements  Response.List
                         dvo.setSubtotal(detalle.getSubtotal());
                         dvo.setIdProducto(detalle.getIdProducto());
                         if(ddao.detalleFacturaSW(dvo, getApplicationContext())){
+                            if (ddao.productoUpdateSW(dvo, getApplicationContext()))
                             contar++;
                         }
 
@@ -151,6 +152,8 @@ public class MAdetallecompra extends AppCompatActivity implements  Response.List
 
 
 
+                }else{
+                    Toast.makeText(this, "No se pudo crear las facturas", Toast.LENGTH_SHORT).show();
                 }
 
             }
@@ -173,8 +176,8 @@ public class MAdetallecompra extends AppCompatActivity implements  Response.List
     public void onResponse(JSONObject response) {
 
         if (dao.respuestaBusquedaUsuario(cvo, response)){
-            editTextNombre.setText("Nombre "+ cvo.getNombreCliente());
-            editTextNit.setText("Nit " + cvo.getNitCliente());
+            editTextNombre.setText("Nombre: "+ cvo.getNombreCliente());
+            editTextNit.setText("Nit: " + cvo.getNitCliente());
 
             editTextTotal.setText("Total Q. " + String.valueOf(calcularTotal()));
 

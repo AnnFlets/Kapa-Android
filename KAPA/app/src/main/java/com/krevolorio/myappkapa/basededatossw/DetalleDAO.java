@@ -72,4 +72,30 @@ public class DetalleDAO implements ConsultasFacturaDAO,  Response.Listener<JSONO
 
         return resultado;
     }
+
+    @Override
+    public boolean productoUpdateSW(DetalleVO cvo, Context context) {
+        boolean resultado = false;
+        try {
+            String url = Constantes.IPSERVER +"KapaApiSwRest/actualizarproducto.php?cantidadQuitar="+cvo.getCantidad()
+                    +"&idProducto="+cvo.getIdProducto();
+
+            //Proceso de interaccion con la api
+            RequestQueue requestQueue = Volley.newRequestQueue(context);
+            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, this, this);
+            requestQueue.add(jsonObjectRequest);
+            resultado = true;
+
+
+        }
+        catch (Exception e){
+            Toast.makeText(context, "Error en la conexion "+e.getMessage(), Toast.LENGTH_SHORT).show();
+
+
+        }
+
+        return resultado;
+    }
+
+
 }

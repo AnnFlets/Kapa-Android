@@ -9,4 +9,5 @@ public interface ConsultasFacturaDAO {
     
     public boolean facturaSW(FacturaVO cvo, Context context);
     public boolean detalleFacturaSW(DetalleVO cvo, Context context);
+    public boolean productoUpdateSW(DetalleVO cvo, Context context);
 }
